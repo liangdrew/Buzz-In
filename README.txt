@@ -1,10 +1,10 @@
-MAKEY MAKEY BREADBOARD QUIZ MANAGEMENT SOFTWARE 
+BUZZ IN - MAKEY MAKEY BREADBOARD QUIZ MANAGEMENT SOFTWARE 
 ===============================================
 
 https://github.com/liangdrew/makeymakey-buzzers/
 ===============================================
 
-This application uses Python and Pygame to allow a game master to manage 
+Buzz In uses Python and Pygame to allow a game master to manage 
 team-based quizzes in which buzzers are used (hardware simulated using MakeyMakey
 breadboard and accompanying wiring http://makeymakey.com). 
 
