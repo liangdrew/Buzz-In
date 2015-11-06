@@ -1,6 +1,8 @@
 #This program is meant to simulate buzzers for time-based team quiz games
 
-import time, sys, pygame
+import time
+import sys
+import pygame
 from pygame.locals import *
 
 print "Welcome to MakeyMakey Quiz by Andrew Liang."
@@ -9,7 +11,7 @@ time.sleep(0.5)
 print "To set up, please ensure that the MakeyMakey breadboard is connected."
 print
 time.sleep(0.5)
-passover=raw_input("When ready, press the 'enter' key.")
+#passover=raw_input("When ready, press the 'enter' key.")
 print
 time.sleep(0.5)
 print "Let's begin!"
@@ -22,7 +24,7 @@ print "Press 'P' at any time to print scores."
 print "Press 'ESC' to exit the program."
 print
 
-pygame.mixer.pre_init(22050,-16,2,1024)
+pygame.mixer.pre_init(22050,-16,2,4096)
 pygame.init()  
 screensize=(600,400)
 screen=pygame.display.set_mode(screensize)
@@ -38,21 +40,24 @@ clock=pygame.time.Clock()
 
 loop=True
 nextQ=1
-bluecount=0
-bluecountwrong=0 #total attempts
-redcount=0
-redcountwrong=0
-greencount=0
-greencountwrong=0
-yellowcount=0
-yellowcountwrong=0
-blackcount=0
-blackcountwrong=0
-bluegate=1
-redgate=1
-greengate=1
-yellowgate=1
-blackgate=1
+
+blue_count=0      # Number of correct answers
+red_count=0
+green_count=0
+yellow_count=0
+black_count=0
+
+blue_count_wrong=0     # Number of total attempts
+red_count_wrong=0
+green_count_wrong=0
+yellow_count_wrong=0
+black_count_wrong=0
+
+blue_gate=1
+red_gate=1
+green_gate=1
+yellow_gate=1
+black_gate=1
 name=""
 yes=0
 
@@ -71,18 +76,18 @@ while loop:
          print
          print "Scores:"
          print "--------------"
-         print "Red Team: ",redcount," correct ",redcountwrong," attempted" 
-         print "Blue Team: ",bluecount," correct ",bluecountwrong," attempted"
-         print "Green Team: ",greencount," correct ",greencountwrong," attempted"
-         print "Yellow Team: ",yellowcount," correct ",yellowcountwrong," attempted"
-         print "Black Team: ",blackcount," correct ",blackcountwrong," attempted"
+         print "Red Team: ",red_count," correct ",red_count_wrong," attempted" 
+         print "Blue Team: ",blue_count," correct ",blue_count_wrong," attempted"
+         print "Green Team: ",green_count," correct ",green_count_wrong," attempted"
+         print "Yellow Team: ",yellow_count," correct ",yellow_count_wrong," attempted"
+         print "Black Team: ",black_count," correct ",black_count_wrong," attempted"
          print "--------------"
          print
             
       if nextQ==1:
                 
          if ev.type==KEYDOWN:
-            if ev.key == K_UP and bluegate==1: #blue
+            if ev.key == K_UP and blue_gate==1: #blue
                background.fill((0,0,255))
                pygame.display.set_caption("Blue Team!")
                print "Blue team!"
@@ -91,7 +96,7 @@ while loop:
                nextQ=0
                yes=1
                
-            elif ev.key == K_RIGHT and redgate==1: #red
+            elif ev.key == K_RIGHT and red_gate==1: #red
                background.fill((255,51,51))
                pygame.display.set_caption("Red Team!")
                print "Red team!"
@@ -101,7 +106,7 @@ while loop:
                nextQ=0
                yes=1
                
-            elif ev.key == K_DOWN and greengate==1: #green
+            elif ev.key == K_DOWN and green_gate==1: #green
                background.fill((0,153,0))
                pygame.display.set_caption("Green Team!")
                print "Green team!"
@@ -112,7 +117,7 @@ while loop:
                yes=1
       
                
-            elif ev.key == K_LEFT and yellowgate==1: #yellow
+            elif ev.key == K_LEFT and yellow_gate==1: #yellow
                background.fill((255,255,102))
                pygame.display.set_caption("Yellow Team!")
                print "Yellow team!"
@@ -122,7 +127,7 @@ while loop:
                nextQ=0
                yes=1
                
-            elif ev.key == K_SPACE and blackgate==1: #black
+            elif ev.key == K_SPACE and black_gate==1: #black
                background.fill((0,0,0))
                pygame.display.set_caption("Black Team!")
                print "Black team!"
@@ -133,36 +138,36 @@ while loop:
                yes=1
       
       if ev.type==KEYDOWN and ev.key==K_y and yes==1: #yes var is to gate y/n keys
-         bluegate=1
-         redgate=1
-         greengate=1
-         yellowgate=1
-         blackgate=1
+         blue_gate=1
+         red_gate=1
+         green_gate=1
+         yellow_gate=1
+         black_gate=1
          background.fill((255,255,255))
          nextQ=1
          if name=="blue":
-            bluecount+=1
-            bluecountwrong+=1
+            blue_count+=1
+            blue_count_wrong+=1
             print "-correct"
             yes=0
          if name=="red":
-            redcount+=1
-            redcountwrong+=1
+            red_count+=1
+            red_count_wrong+=1
             print "-correct"
             yes=0
          if name=="green":
-            greencount+=1
-            greencountwrong+=1
+            green_count+=1
+            green_count_wrong+=1
             print "-correct"
             yes=0
          if name=="yellow":
-            yellowcount+=1
-            yellowcountwrong+=1
+            yellow_count+=1
+            yellow_count_wrong+=1
             print "-correct"
             yes=0
          if name=="black":
-            blackcount+=1
-            blackcountwrong+=1
+            black_count+=1
+            black_count_wrong+=1
             print "-correct"
             yes=0
          print
@@ -173,24 +178,24 @@ while loop:
          print
          background.fill((255,255,255))
          if name=="blue":
-            bluecountwrong+=1
-            bluegate=0
+            blue_count_wrong+=1
+            blue_gate=0
             yes=0
          if name=="red":
-            redcountwrong+=1
-            redgate=0
+            red_count_wrong+=1
+            red_gate=0
             yes=0
          if name=="green":
-            greencountwrong+=1
-            greengate=0
+            green_count_wrong+=1
+            green_gate=0
             yes=0
          if name=="yellow":
-            yellowcountwrong+=1
-            yellowgate=0
+            yellow_count_wrong+=1
+            yellow_gate=0
             yes=0
          if name=="black":
-            blackcountwrong+=1
-            blackgate=0
+            black_count_wrong+=1
+            black_gate=0
             yes=0
          
    screen.blit(background, (0,0))
